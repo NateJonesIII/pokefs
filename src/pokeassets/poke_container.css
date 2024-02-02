@@ -1,0 +1,14 @@
+.outer-container {
+  width: 100%;
+}
+.outer-container h1 {
+  margin: 35px auto;
+  letter-spacing: 2px;
+  background-color: orangered;
+  text-align: center;
+  border: 2px solid whitesmoke;
+  border-radius: 4px;
+  color: whitesmoke;
+  font-weight: bolder;
+  padding: 1rem;
+}/*# sourceMappingURL=poke_container.css.map */

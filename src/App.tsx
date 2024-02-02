@@ -1,24 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import PokeList from './pokeassets/PokeList';
+import './main.css';
+/* Test case pokemon */
+const pokemons = [
+  {
+    name: 'Weedle',
+    id: 12,
+    types: ['bug', 'poison'],
+    abilities:['overgrow'],
+    image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-ii/crystal/shiny/13.png',
+    user: 'user@email.com'
+  }
+]
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <PokeList pokemons={pokemons} />
     </div>
   );
 }
