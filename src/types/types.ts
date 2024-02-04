@@ -12,12 +12,19 @@ export interface Type{
     }
 }
 
+export interface PokedexEntry{
+    pokedexEntry: {
+        id: number;
+    }
+}
+
 export interface Pokemon {
     id: number;
     name: string;
     types: string[];
     abilities: string[];
     image: string;
+    pokedexEntry: number;
     user?: string;
 }
 
