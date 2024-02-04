@@ -11,4 +11,9 @@
   color: whitesmoke;
   font-weight: bolder;
   padding: 1rem;
+}
+
+.pokemon-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
 }/*# sourceMappingURL=poke_container.css.map */

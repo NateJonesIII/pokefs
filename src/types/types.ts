@@ -1,6 +1,16 @@
-import { Interface } from "readline";
-
 export { };
+
+export interface Ability{
+    ability: {
+        name: string;
+    }
+}
+
+export interface Type{
+    type: {
+        name: string;
+    }
+}
 
 export interface Pokemon {
     id: number;
@@ -8,7 +18,7 @@ export interface Pokemon {
     types: string[];
     abilities: string[];
     image: string;
-    user: string;
+    user?: string;
 }
 
 export interface PokemonProps {
