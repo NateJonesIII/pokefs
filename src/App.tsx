@@ -2,10 +2,7 @@ import React, {useEffect, useState} from 'react';
 import PokeList from './pokeassets/PokeList';
 import { Pokemon, Type, Ability, PokedexEntry} from './types/types'
 import './main.css';
-
-
-
-
+import Register from './auth/Register';
 
 
 function App() {
@@ -70,6 +67,7 @@ console.log('pokelist updated:',updatedPokemonList);
 
   return (
     <div className="App">
+      <Register />
       <PokeList pokemons={pokeList} />
     </div>
   );
