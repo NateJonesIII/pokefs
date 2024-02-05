@@ -4,7 +4,6 @@ import { Pokemon, Type, Ability, PokedexEntry} from './types/types'
 import './main.css';
 import Register from './auth/Register';
 
-
 function App() {
 
   const [pokeList, setPokeList] = useState<Pokemon[]>([])
@@ -58,8 +57,6 @@ console.log('pokelist updated:',updatedPokemonList);
       } catch (error) {
         console.log("Error fetching data from pokeapi", error);
       }
-      
-
     }
     getPokeListData();
     // single data call
