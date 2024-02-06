@@ -3,10 +3,16 @@ import PokeList from './pokeassets/PokeList';
 import { Pokemon, Type, Ability, PokedexEntry} from './types/types'
 import './main.css';
 import Register from './auth/Register';
+import { getAuth } from 'firebase/auth';
 
 function App() {
-
-  const [pokeList, setPokeList] = useState<Pokemon[]>([])
+  // the list to update for pokemon api call
+  const [pokeList, setPokeList] = useState<Pokemon[]>([]);
+  // auth instance
+  const auth = getAuth();
+  const [isRegistered, setIsRegistered] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [user, setUser] = useState<string>('');
 
   useEffect(()=>{
     // fetch pokemon from PokeAPI
@@ -64,7 +70,12 @@ console.log('pokelist updated:',updatedPokemonList);
 
   return (
     <div className="App">
-      <Register />
+      <Register 
+      auth ={auth}
+      setIsLoggedIn={setIsLoggedIn}
+      setIsRegistered={setIsRegistered}
+      setUser={setUser}
+      />
       <PokeList pokemons={pokeList} />
     
     </div>
