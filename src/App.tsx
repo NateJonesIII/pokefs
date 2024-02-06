@@ -12,7 +12,7 @@ function App() {
     // fetch pokemon from PokeAPI
     const getPokeListData = async () => {
       const apiUrl: string = "https://pokeapi.co/api/v2";
-      const limit: number = 386;
+      const limit: number = 1025;
       const offset: number = 0;
       const url: string = `${apiUrl}/pokemon?limit=${limit}&offset=${offset}`;
 
@@ -46,7 +46,7 @@ function App() {
               //console.log('abilities', abilities)
 
               const { sprites } = pokemonData;
-              const image = sprites.front_shiny;
+              const image = sprites.front_default;
 
               return {...pokemon, types, abilities, image, pokedexEntry}
             })
@@ -66,6 +66,7 @@ console.log('pokelist updated:',updatedPokemonList);
     <div className="App">
       <Register />
       <PokeList pokemons={pokeList} />
+    
     </div>
   );
 }

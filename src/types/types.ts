@@ -1,4 +1,4 @@
-import { Auth } from "firebase/auth"
+import { Auth } from "firebase/auth";
 export { };
 
 

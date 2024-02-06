@@ -19,7 +19,7 @@ const PokeItem: React.FC<PokeItemProps> = ({
                 <span>
                     Type:  
                 </span> 
-                 {types.join(", ")}
+                  {types.join(", ")}
             </p>
             <p>
                 <span>

@@ -7,7 +7,7 @@ const pokeList: React.FC<PokemonProps> = ({
 }) => {
     return(
         <div className="outer-container">
-            <h1>Pokemon List</h1>
+            <h1>Pokemon Catalogue</h1>
             <div className="pokemon-container">
                 {
                     pokemons.map((pokemon, index) => {
@@ -17,8 +17,9 @@ const pokeList: React.FC<PokemonProps> = ({
                     })
                 }
             </div>
+            <div className="footer"> @2024 PokeCatalogue</div>
         </div>
     )
 }
 
-export default pokeList
+export default pokeList;

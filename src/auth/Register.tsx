@@ -17,7 +17,7 @@ const Register: React.FC<AuthProps> = ({
             <h2>Register:</h2>
             <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
             <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-            <button onClick={handleRegister}>Go</button>
+            <button onClick={handleRegister}>Let's Go!</button>
         </div>
     )
 }

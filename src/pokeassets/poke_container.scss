@@ -12,7 +12,21 @@
         font-weight: bolder;
         padding: 1rem;
     }
+
+.footer {
+        text-align: center;
+        margin: 35px 0 auto;
+        background-color: orangered;
+        font-weight: bolder;
+        padding: 1rem;
+        color: whitesmoke;
+        border: 2px solid whitesmoke;
+        border-radius: 4px;
+        letter-spacing: 2px;
+    }
 }
+
+
 
 .pokemon-container {
     display: grid;
