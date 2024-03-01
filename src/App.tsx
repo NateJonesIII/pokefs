@@ -6,6 +6,7 @@ import './main.css';
 import Register from './auth/Register';
 import Login from './auth/Login';
 import { getAuth } from 'firebase/auth';
+//Main logo image
 import pokeballImg from './assets/pokei_ico.png'
 
 
@@ -56,7 +57,6 @@ function App() {
               //console.log('pokemondata', pokemonData)
               //console.log('types', types)
               //console.log('abilities', abilities)
-
               const { sprites } = pokemonData;
               const image = sprites.front_default;
 
@@ -95,26 +95,27 @@ console.log('pokelist updated:',updatedPokemonList);
     setUser={setUser}
     />
   )
-
+    // holding HomePage htmml content for cleaner routes
   const HomePage = () => (
     <div>
       <PokeList pokemons={pokeList} />
     </div>
-  )
+  ) //HomePage end
+  // Returning site initial page ui
   return (
     <div className="App">
       <Router>
         <div className="top-container">
-          <img src={pokeballImg} alt="pokeball-black-2d" />
-          <h1 className='main-logo-text'>Pokedex FS </h1>
+          <img src={pokeballImg} alt="pokeball-black-2d"/>
+          <h1 className='main-logo-text'>Pokedex FS</h1>
           <nav>
             <ul>
               <li>
                 <Link to="/login">Login</Link>
               </li>
-              <li onClick={handleLogout}>
-                <Link to="/logout">Logout</Link>
-              </li>
+              <li>
+                  <Link to="/">Home</Link>
+                </li>
               <li>
                 <Link to="/register">Register</Link>
               </li>
@@ -122,9 +123,9 @@ console.log('pokelist updated:',updatedPokemonList);
                 <li>
                   <Link to="/team">Team</Link>
                 </li>
-                <li>
-                  <Link to="/">Home</Link>
-                </li>
+                <li onClick={handleLogout} className='logout-color'>
+                <Link to="/logout">Logout</Link>
+              </li>
               </div>
             </ul>
           </nav>
@@ -133,6 +134,7 @@ console.log('pokelist updated:',updatedPokemonList);
           <Route path="/register" element={RegisterComponent}/>
           <Route path="/login" element={LoginComponent}/>
           <Route path='/' element={
+            //Checking if user is registered first
             isRegistered ? (
               isLoggedIn ?(
                 <HomePage />
@@ -142,8 +144,6 @@ console.log('pokelist updated:',updatedPokemonList);
             )
           } />
         </Routes>
-      
-
       </Router>
     </div>
   );

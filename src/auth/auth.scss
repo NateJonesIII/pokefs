@@ -7,16 +7,17 @@
     width: 43%;
 
     input {
-       
+       margin-left: 5px;
         padding: .5rem;
         border-radius: 5px;
     }
 
     button {
+        margin-left: 5px;
         padding: 1rem;
-        border-radius: 55%;
+        border-radius: 50%;
         border: 4px solid black;
-        background-color: red;
+        background-color: rgb(85, 179, 255);
         color: white;
         transition: all 0.2s ease-in-out;
         cursor: pointer;
