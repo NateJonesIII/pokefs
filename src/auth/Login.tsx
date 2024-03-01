@@ -1,6 +1,6 @@
 import { AuthProps } from "../types/types";
 import React, {useState, ReactElement } from "react";
-import './auth.css'
+
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 

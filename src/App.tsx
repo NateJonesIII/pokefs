@@ -1,10 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import PokeList from './pokeassets/PokeList';
 import { Pokemon, Type, Ability, PokedexEntry} from './types/types'
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './main.css';
 import Register from './auth/Register';
 import Login from './auth/Login';
 import { getAuth } from 'firebase/auth';
+import pokeballImg from './assets/pokei_ico.png'
+
 
 function App() {
   // the list to update for pokemon api call
@@ -71,22 +74,77 @@ console.log('pokelist updated:',updatedPokemonList);
     // single data call
   },[])
 
+  const handleLogout = () =>{
+    console.log("Logging out user")
+  }
+
+  const LoginComponent = (
+  <Login 
+    auth ={auth}
+    setIsLoggedIn={setIsLoggedIn}
+    setIsRegistered={setIsRegistered}
+    setUser={setUser}
+    />
+  ) 
+  
+  const RegisterComponent = (
+    <Register 
+    auth ={auth}
+    setIsLoggedIn={setIsLoggedIn}
+    setIsRegistered={setIsRegistered}
+    setUser={setUser}
+    />
+  )
+
+  const HomePage = () => (
+    <div>
+      <PokeList pokemons={pokeList} />
+    </div>
+  )
   return (
     <div className="App">
-      <Register 
-      auth ={auth}
-      setIsLoggedIn={setIsLoggedIn}
-      setIsRegistered={setIsRegistered}
-      setUser={setUser}
-      />
-      {/* <Login 
-      auth ={auth}
-      setIsLoggedIn={setIsLoggedIn}
-      setIsRegistered={setIsRegistered}
-      setUser={setUser}
-      /> */}
-      <PokeList pokemons={pokeList} />
-    
+      <Router>
+        <div className="top-container">
+          <img src={pokeballImg} alt="pokeball-black-2d" />
+          <h1 className='main-logo-text'>Pokedex FS </h1>
+          <nav>
+            <ul>
+              <li>
+                <Link to="/login">Login</Link>
+              </li>
+              <li onClick={handleLogout}>
+                <Link to="/logout">Logout</Link>
+              </li>
+              <li>
+                <Link to="/register">Register</Link>
+              </li>
+              <div>
+                <li>
+                  <Link to="/team">Team</Link>
+                </li>
+                <li>
+                  <Link to="/">Home</Link>
+                </li>
+              </div>
+            </ul>
+          </nav>
+        </div>
+        <Routes>
+          <Route path="/register" element={RegisterComponent}/>
+          <Route path="/login" element={LoginComponent}/>
+          <Route path='/' element={
+            isRegistered ? (
+              isLoggedIn ?(
+                <HomePage />
+              ): (LoginComponent)
+            ):(
+              RegisterComponent
+            )
+          } />
+        </Routes>
+      
+
+      </Router>
     </div>
   );
 }

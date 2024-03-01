@@ -1,0 +1,29 @@
+.auth-container {
+    letter-spacing: 1px;
+    display: flex;
+    margin: 5% auto;
+    justify-content: space-between;
+    align-items: center;
+    width: 43%;
+
+    input {
+       
+        padding: .5rem;
+        border-radius: 5px;
+    }
+
+    button {
+        padding: 1rem;
+        border-radius: 55%;
+        border: 4px solid black;
+        background-color: red;
+        color: white;
+        transition: all 0.2s ease-in-out;
+        cursor: pointer;
+        &:hover {
+            transform: scale(1.1);
+            color: yellow;
+            border-color: yellow;
+        }
+    }
+}
