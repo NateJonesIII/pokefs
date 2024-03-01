@@ -11,7 +11,7 @@ body {
 .top-container {
     margin: 20px auto;
     display: flex;
-    width: 37%;
+    width: 45%;
 
     .main-logo-text {
         margin: 0 auto;
@@ -23,7 +23,7 @@ body {
     img {
         margin: 1 auto;
         border-radius: 50%;
-        transition:all 1s ease-in-out;
+        transition: all 1s ease-in-out;
         width: 200px;
 
         &:hover {
