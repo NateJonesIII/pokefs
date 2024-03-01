@@ -1,5 +1,7 @@
-import React, {useState, ReactElement } from "react";
 import { AuthProps } from "../types/types";
+import React, {useState, ReactElement } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+
 
 const Register: React.FC<AuthProps> = ({
     auth,
@@ -10,7 +12,21 @@ const Register: React.FC<AuthProps> = ({
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
-    const handleRegister = () => { }
+    const handleRegister = async () => { 
+        try {
+            await createUserWithEmailAndPassword(auth, email, password).then(
+                (userCredential) => {
+                    const user = userCredential.user;
+                    setIsRegistered(true);
+                    setIsLoggedIn(true);
+                    setUser(user.email);
+                    console.log(user.email, "has become a trainer!");
+                }
+            )
+        } catch (error) {
+            
+        }
+    }
 
     return (
         <div className="auth-container">

@@ -3,6 +3,7 @@ import PokeList from './pokeassets/PokeList';
 import { Pokemon, Type, Ability, PokedexEntry} from './types/types'
 import './main.css';
 import Register from './auth/Register';
+import Login from './auth/Login';
 import { getAuth } from 'firebase/auth';
 
 function App() {
@@ -12,13 +13,14 @@ function App() {
   const auth = getAuth();
   const [isRegistered, setIsRegistered] = useState<boolean>(false);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  const [user, setUser] = useState<string>('');
+  const [user, setUser] = useState<string|null>('');
+
 
   useEffect(()=>{
     // fetch pokemon from PokeAPI
     const getPokeListData = async () => {
       const apiUrl: string = "https://pokeapi.co/api/v2";
-      const limit: number = 1025;
+      const limit: number = 5;
       const offset: number = 0;
       const url: string = `${apiUrl}/pokemon?limit=${limit}&offset=${offset}`;
 
@@ -29,6 +31,7 @@ function App() {
         }
 
         const data = await response.json();
+        
         const pokemonList: {
           name:string;
           url:string;
@@ -76,6 +79,12 @@ console.log('pokelist updated:',updatedPokemonList);
       setIsRegistered={setIsRegistered}
       setUser={setUser}
       />
+      {/* <Login 
+      auth ={auth}
+      setIsLoggedIn={setIsLoggedIn}
+      setIsRegistered={setIsRegistered}
+      setUser={setUser}
+      /> */}
       <PokeList pokemons={pokeList} />
     
     </div>

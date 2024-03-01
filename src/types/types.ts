@@ -2,6 +2,14 @@ import { Auth } from "firebase/auth";
 export { };
 
 
+//Authentication Props
+export interface AuthProps {
+    auth: Auth;
+    setIsRegistered: (isRegistered: boolean) => void;
+    setIsLoggedIn: (isLoggedIn: boolean) => void;
+    setUser: (user: string|null) => void;
+}
+
 //Pokemon Interfaces
 export interface Ability{
     ability: {
@@ -39,10 +47,3 @@ export interface PokeItemProps {
     pokemon: Pokemon
 }
 
-//Authentication Props
-export interface AuthProps {
-    auth: Auth;
-    setIsRegistered: (isRegistered: boolean) => void;
-    setIsLoggedIn: (isLoggedIn: boolean) => void;
-    setUser: (user: string)=> void;
-}
