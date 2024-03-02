@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './main.css';
 import Register from './auth/Register';
 import Login from './auth/Login';
-import { getAuth } from 'firebase/auth';
+import { getAuth, signOut } from 'firebase/auth';
 //Main logo image
 import pokeballImg from './assets/pokei_ico.png'
 
@@ -18,13 +18,14 @@ function App() {
   const [isRegistered, setIsRegistered] = useState<boolean>(false);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [user, setUser] = useState<string|null>('');
+  const [userTeam, setUserTeam] = useState<Pokemon[]>([]);
 
 
   useEffect(()=>{
     // fetch pokemon from PokeAPI
     const getPokeListData = async () => {
       const apiUrl: string = "https://pokeapi.co/api/v2";
-      const limit: number = 5;
+      const limit: number = 9;
       const offset: number = 0;
       const url: string = `${apiUrl}/pokemon?limit=${limit}&offset=${offset}`;
 
@@ -74,8 +75,19 @@ console.log('pokelist updated:',updatedPokemonList);
     // single data call
   },[])
 
-  const handleLogout = () =>{
-    console.log("Logging out user")
+  const addPokemonToState = () => {
+    
+  }
+
+  const handleLogout = async () =>{
+    try {
+      await signOut(auth);
+      setIsLoggedIn(false);
+      setUser("");
+      console.log(user, ' has been logged out successfully');
+    } catch (error) {
+      console.error('Error logging out user', error);
+    }
   }
 
   const LoginComponent = (
@@ -98,9 +110,10 @@ console.log('pokelist updated:',updatedPokemonList);
     // holding HomePage htmml content for cleaner routes
   const HomePage = () => (
     <div>
-      <PokeList pokemons={pokeList} />
+      <PokeList pokemons={pokeList} user={user} addPokemonToState={addPokemonToState}/>
     </div>
   ) //HomePage end
+
   // Returning site initial page ui
   return (
     <div className="App">

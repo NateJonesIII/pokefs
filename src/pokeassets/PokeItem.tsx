@@ -1,13 +1,30 @@
 import { PokeItemProps } from "../types/types";
 import './pokeItem.css'
+import { addDoc, getFirestore, collection } from 'firebase/firestore'
 
 const PokeItem: React.FC<PokeItemProps> = ({
-    pokemon
+    pokemon, flow, onAdd, onRemove
 }) => {
-    //destructure
+    // destructure 
     const {pokedexEntry,image, name, types, abilities, user: userEmail} = pokemon;
-    //log value to see what its sending, clear warning of non use as well
+
+    // log value to see what its sending, clear warning of non use as well
     console.log('userEmail', userEmail);
+
+    // database call function
+    const db = getFirestore();
+
+    const handleAddPokemon = (pokemon): void => { 
+
+        addDoc(collection(db, "pokemon"), pokemon).then(() => {
+            // call the onAdd function here to add doc to database
+            onAdd(pokemon);
+            console.log(pokemon + 'was successfully added to firestore');
+        }).catch((error) => {
+            console.log("Error adding the document", error);
+        })
+    };
+
     return( 
     <div className="poke-card">
         <div className="poke-data">
@@ -27,6 +44,8 @@ const PokeItem: React.FC<PokeItemProps> = ({
                 </span>
                   {abilities.join(", ")}
             </p>
+
+            <button className="add-pokemon-button" onClick={()=>handleAddPokemon(pokemon)}>Add</button>
         </div>
     </div>)
     

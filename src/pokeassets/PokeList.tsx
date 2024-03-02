@@ -3,7 +3,7 @@ import './poke_container.css'
 import PokeItem from "./PokeItem"
 
 const pokeList: React.FC<PokemonProps> = ({
-    pokemons
+    pokemons, removePokemonFromState, addPokemonToState
 }) => {
     return(
         <div className="outer-container">
@@ -12,12 +12,14 @@ const pokeList: React.FC<PokemonProps> = ({
                 {
                     pokemons.map((pokemon, index) => {
                         return (
-                                <PokeItem pokemon={pokemon} key={index} />
+                                <PokeItem flow='list' pokemon={pokemon} key={index} 
+                                onRemove={removePokemonFromState} 
+                                onAdd={addPokemonToState}/>
                         )
                     })
                 }
             </div>
-            <div className="footer"> @2024 PokeCatalogue</div>
+            <div className="footer"> @2024 PokeDex FS</div>
         </div>
     )
 }

@@ -40,10 +40,16 @@ export interface Pokemon {
 }
 
 export interface PokemonProps {
-    pokemons: Pokemon[]
+    pokemons: Pokemon[];
+    user: string|null;
+    removePokemonFromState?: Function;
+    addPokemonToState?: Function;
 }
 
 export interface PokeItemProps {
-    pokemon: Pokemon
+    pokemon: Pokemon;
+    flow: string;
+    onRemove?: Function;
+    onAdd?: Function;
 }
 
