@@ -1,6 +1,7 @@
 import { AuthProps } from "../types/types";
 import React, {useState, ReactElement } from "react";
 import './auth.css'
+import { useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
 
@@ -13,6 +14,8 @@ const Register: React.FC<AuthProps> = ({
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
+    const navigate = useNavigate();
+
     const handleRegister = async () => { 
         try {
             await createUserWithEmailAndPassword(auth, email, password).then(
@@ -21,11 +24,13 @@ const Register: React.FC<AuthProps> = ({
                     setIsRegistered(true);
                     setIsLoggedIn(true);
                     setUser(user.email);
+                    navigate("/");
                     console.log(user.email, "has become a trainer!");
                 }
             )
         } catch (error) {
-            
+            setIsRegistered(false);
+            console.log(error);
         }
     }
 

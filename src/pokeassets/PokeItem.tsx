@@ -5,7 +5,7 @@ import { addDoc, getFirestore, collection } from 'firebase/firestore'
 const PokeItem: React.FC<PokeItemProps> = ({
     pokemon, flow, onAdd, onRemove
 }) => {
-    // destructure 
+    // destructure
     const {pokedexEntry,image, name, types, abilities, user: userEmail} = pokemon;
 
     // log value to see what its sending, clear warning of non use as well

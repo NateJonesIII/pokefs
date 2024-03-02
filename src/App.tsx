@@ -8,6 +8,7 @@ import Login from './auth/Login';
 import { getAuth, signOut } from 'firebase/auth';
 //Main logo image
 import pokeballImg from './assets/pokei_ico.png'
+import UserTeam from './pokeassets/userTeam';
 
 
 function App() {
@@ -41,20 +42,20 @@ function App() {
           name:string;
           url:string;
           id:number;
-          types: string[]
+          types: string[];
         }[] = data.results;
 
         const updatedPokemonList = await Promise.all(
             pokemonList.map(async (pokemon)=>{
               const response = await fetch(pokemon.url);
               if (!response.ok) {
-                throw new Error(`Error fetching data for ${pokemon.name}`)
+                throw new Error(`Error fetching data for ${pokemon.name}`);
               }
               const pokemonData = await response.json();
-              const types = pokemonData.types.map(({ type }: Type) => type.name)
-              const abilities = pokemonData.abilities.map(({ ability }: Ability) => ability.name)
+              const types = pokemonData.types.map(({ type }: Type) => type.name);
+              const abilities = pokemonData.abilities.map(({ ability }: Ability) => ability.name);
               const pokedexEntry = pokemonData.id;
-              console.log('PokeID:', pokedexEntry)
+              console.log('PokeID:', pokedexEntry);
               //console.log('pokemondata', pokemonData)
               //console.log('types', types)
               //console.log('abilities', abilities)
@@ -78,6 +79,11 @@ console.log('pokelist updated:',updatedPokemonList);
   const addPokemonToState = () => {
     
   }
+
+  const removePokemonFromState = () => {
+    
+  }
+
 
   const handleLogout = async () =>{
     try {
@@ -114,6 +120,14 @@ console.log('pokelist updated:',updatedPokemonList);
     </div>
   ) //HomePage end
 
+  const TeamComponent = (
+    <UserTeam
+    user={user}
+    pokemons={userTeam}
+    removePokemonFromState={removePokemonFromState}
+    />
+  )
+
   // Returning site initial page ui
   return (
     <div className="App">
@@ -145,6 +159,7 @@ console.log('pokelist updated:',updatedPokemonList);
         </div>
         <Routes>
           <Route path="/register" element={RegisterComponent}/>
+          <Route path="/team" element={TeamComponent}/>
           <Route path="/login" element={LoginComponent}/>
           <Route path='/' element={
             //Checking if user is registered first

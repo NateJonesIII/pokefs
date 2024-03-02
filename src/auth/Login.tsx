@@ -2,7 +2,7 @@ import { AuthProps } from "../types/types";
 import React, {useState, ReactElement } from "react";
 
 import { signInWithEmailAndPassword } from "firebase/auth";
-
+import { useNavigate } from "react-router-dom";
 
 const Login: React.FC<AuthProps> = ({
     auth,
@@ -13,6 +13,8 @@ const Login: React.FC<AuthProps> = ({
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
+    const navigate = useNavigate();
+
     const handleLogin = async () => { 
         try {
             await signInWithEmailAndPassword(auth, email, password).then(
@@ -21,11 +23,13 @@ const Login: React.FC<AuthProps> = ({
                     setIsRegistered(true);
                     setIsLoggedIn(true);
                     setUser(user.email);
+                    navigate("/");
                     console.log(`The Trainer ${user.email} has logged in!`);
                 }
             )
         } catch (error) {
-            
+            setIsRegistered(false);
+            console.log(error);
         }
     }
 
