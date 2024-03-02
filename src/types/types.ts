@@ -50,6 +50,6 @@ export interface PokeItemProps {
     pokemon: Pokemon;
     flow: string;
     onRemove?: Function;
-    onAdd?: Function;
+    onAdd?: Function ;
 }
 

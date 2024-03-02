@@ -18,8 +18,8 @@ const PokeItem: React.FC<PokeItemProps> = ({
 
         addDoc(collection(db, "pokemon"), pokemon).then(() => {
             // call the onAdd function here to add doc to database
-            onAdd(pokemon);
-            console.log(pokemon + 'was successfully added to firestore');
+            onAdd!(pokemon); // "!" ignore undefined function error
+            console.log(pokemon.name + ' was sent to pc');
         }).catch((error) => {
             console.log("Error adding the document", error);
         })
