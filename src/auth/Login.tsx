@@ -1,8 +1,8 @@
 import { AuthProps } from "../types/types";
 import React, {useState, ReactElement } from "react";
-
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
 
 const Login: React.FC<AuthProps> = ({
     auth,

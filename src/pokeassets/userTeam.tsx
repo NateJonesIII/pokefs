@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { PokemonProps } from "../types/types"
 import './poke_container.css'
 import PokeItem from "./PokeItem"
@@ -5,6 +6,7 @@ import PokeItem from "./PokeItem"
 const userTeam: React.FC<PokemonProps> = ({
     user, pokemons, removePokemonFromState, 
 }) => {
+    
     return(
         <div className="outer-container">
             <h1><span style={{color:"yellow"}}>{user}'s </span>Team</h1>

@@ -9,7 +9,7 @@ import { getAuth, signOut } from 'firebase/auth';
 //Main logo image
 import pokeballImg from './assets/pokei_ico.png'
 import UserTeam from './pokeassets/userTeam';
-
+import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
 
 function App() {
   // the list to update for pokemon api call
@@ -20,6 +20,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [user, setUser] = useState<string|null>('');
   const [userTeam, setUserTeam] = useState<Pokemon[]>([]);
+  const db = getFirestore();
 
 
   useEffect(()=>{
@@ -83,6 +84,27 @@ console.log('pokelist updated:',updatedPokemonList);
   const removePokemonFromState = () => {
     
   }
+
+  useEffect(()=>{
+    const getUserPokemonData = async () => {
+      try {
+        const userTeamQuery = query(
+          collection(db, "pokemon"),
+          where("user", "==", user)
+        )
+
+        const queryCapture = await getDocs(userTeamQuery)
+        const updatedPokemonList: Pokemon[] = [];// empty by default
+      queryCapture.forEach((doc) => {
+        updatedPokemonList.push(doc.data() as Pokemon) 
+      })
+
+      } catch (error) {
+        console.log(error, " Error getting user pokemon data!")
+      }
+    }
+    getUserPokemonData()
+  }, [])
 
 
   const handleLogout = async () =>{
