@@ -18,7 +18,7 @@ function App() {
   const auth = getAuth();
   const [isRegistered, setIsRegistered] = useState<boolean>(false);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  const [user, setUser] = useState<string|null>('');
+  const [user, setUser] = useState<string>('');
   const [userTeam, setUserTeam] = useState<Pokemon[]>([]);
   const db = getFirestore();
 
@@ -63,10 +63,9 @@ function App() {
               const { sprites } = pokemonData;
               const image = sprites.front_default;
 
-              return {...pokemon, types, abilities, image, pokedexEntry}
+              return {...pokemon, types, abilities, image, pokedexEntry, user}
             })
         )
-console.log('pokelist updated:',updatedPokemonList);
             setPokeList(updatedPokemonList);
         //console.log('data', data);
       } catch (error) {
@@ -77,8 +76,9 @@ console.log('pokelist updated:',updatedPokemonList);
     // single data call
   },[])
 
-  const addPokemonToState = () => {
-    
+  const addPokemonToState = (pokemon: Pokemon):void => {
+    const updatedPokemon = {...userTeam, pokemon}
+    setUserTeam(updatedPokemon)
   }
 
   const removePokemonFromState = () => {
@@ -99,8 +99,10 @@ console.log('pokelist updated:',updatedPokemonList);
         updatedPokemonList.push(doc.data() as Pokemon) 
       })
 
+      setUserTeam(updatedPokemonList)
+
       } catch (error) {
-        console.log(error, " Error getting user pokemon data!")
+        console.error(" Error getting user pokemon data!")
       }
     }
     getUserPokemonData()

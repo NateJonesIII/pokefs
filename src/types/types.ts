@@ -7,7 +7,7 @@ export interface AuthProps {
     auth: Auth;
     setIsRegistered: (isRegistered: boolean) => void;
     setIsLoggedIn: (isLoggedIn: boolean) => void;
-    setUser: (user: string|null) => void;
+    setUser: (user: string) => void;
 }
 
 //Pokemon Interfaces
@@ -36,12 +36,12 @@ export interface Pokemon {
     abilities: string[];
     image: string;
     pokedexEntry: number;
-    user?: string;
+    user: string;
 }
 
 export interface PokemonProps {
     pokemons: Pokemon[];
-    user: string|null;
+    user: string;
     removePokemonFromState?: Function;
     addPokemonToState?: Function;
 }

@@ -22,7 +22,7 @@ const Login: React.FC<AuthProps> = ({
                     const user = userCredential.user;
                     setIsRegistered(true);
                     setIsLoggedIn(true);
-                    setUser(user.email);
+                    setUser(user.email!);
                     navigate("/");
                     console.log(`The Trainer ${user.email} has logged in!`);
                 }

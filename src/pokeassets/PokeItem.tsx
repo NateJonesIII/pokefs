@@ -1,4 +1,4 @@
-import { PokeItemProps } from "../types/types";
+import { PokeItemProps, Pokemon } from "../types/types";
 import './pokeItem.css'
 import { addDoc, getFirestore, collection } from 'firebase/firestore'
 
@@ -9,12 +9,12 @@ const PokeItem: React.FC<PokeItemProps> = ({
     const {pokedexEntry,image, name, types, abilities, user: userEmail} = pokemon;
 
     // log value to see what its sending, clear warning of non use as well
-    console.log('userEmail', userEmail);
+    //console.log('userEmail', userEmail);
 
     // database call function
     const db = getFirestore();
 
-    const handleAddPokemon = (pokemon): void => { 
+    const handleAddPokemon = (pokemon: Pokemon): void => { 
 
         addDoc(collection(db, "pokemon"), pokemon).then(() => {
             // call the onAdd function here to add doc to database
