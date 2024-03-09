@@ -1,6 +1,6 @@
 import { PokeItemProps, Pokemon } from "../types/types";
 import './pokeItem.css'
-import { addDoc, getFirestore, collection } from 'firebase/firestore'
+import { addDoc, getFirestore, collection, CollectionReference } from 'firebase/firestore'
 
 const PokeItem: React.FC<PokeItemProps> = ({
     pokemon, flow, onAdd, onRemove
@@ -16,10 +16,18 @@ const PokeItem: React.FC<PokeItemProps> = ({
 
     const handleAddPokemon = (pokemon: Pokemon): void => { 
 
+        const pokemonCollection = collection(db, "pokemon")
+        if (!(pokemonCollection instanceof CollectionReference)){
+            console.log("Invalid CollectionReference: ", pokemonCollection)
+            return
+        }
+
         addDoc(collection(db, "pokemon"), pokemon).then(() => {
             // call the onAdd function here to add doc to database
             onAdd!(pokemon); // "!" ignore undefined function error
+
             console.log(pokemon.name + ' was sent to pc');
+
         }).catch((error) => {
             console.log("Error adding the document", error);
         })
@@ -34,13 +42,13 @@ const PokeItem: React.FC<PokeItemProps> = ({
             <h3>{name}</h3>
             <p>
                 <span>
-                    Type:  
+                    Type:  <br></br>
                 </span> 
                   {types.join(", ")}
             </p>
             <p>
                 <span>
-                Ability: 
+                Ability: <br></br>
                 </span>
                   {abilities.join(", ")}
             </p>

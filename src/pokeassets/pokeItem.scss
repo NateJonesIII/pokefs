@@ -1,17 +1,19 @@
 .poke-card {
     width: 220px;
-    height:365px;
+    height:410px;
     border: 3px solid rgb(216, 87, 89);
     background: url('../assets/background_yellowOrange.avif');
     border-radius: 5px;
     padding: 15px;
     overflow: hidden;
     margin: 20px 0;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
    
     .poke-data {
         display: flex;
         flex-direction: column;
         height: 20%;
+        
 
         img {
             background: white;
@@ -20,27 +22,57 @@
             padding: 5px;
             width: 70%;
             margin: 10px auto;
+
+            &:hover {
+                transform: scale(1.07);
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            }
         }
 
         h3 {
             color: white;
             margin: 5px auto;
-            background:rgb(226, 9, 9);
+            background: orangered; /* rgb(226, 9, 9) */
             width: 70%;
             text-align: center;
             border-radius: 7px;
             padding: 3px;
             letter-spacing: 1px;
+
+            &:hover {
+                border-color: red;
+                color: yellow;
+                transform: scale(1.06);
+            }
         }
 
         p{
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
             margin: 2px 0;
             background: white;
-            padding: 3px;
+            padding: 2.5px;
             letter-spacing: 1px;
             border: 2px solid black;
             border-radius: 7px;
+            font-size: medium;
         }
+        
+        .add-pokemon-button {
+            padding: 0.5rem;
+            margin: 1rem auto;
+            width: 120px;
+            background-color: yellow;
+            border-color: red;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2 ease-in-out;
+
+            &:hover {
+                border-color: red;
+                color: red;
+                transform: scale(1.06);
+            }
+        }
+
     }
 }

@@ -18,7 +18,7 @@ body {
         align-self: center;
         font-size: 3.2rem;
         padding: 1rem;
-        color: red;
+        color: orangered;
     }
     img {
         margin: 1 auto;
@@ -49,7 +49,7 @@ body {
                     transition: all 0.2s ease-in-out;
                     letter-spacing: 1px;
                     text-decoration: none;
-                    color: red;
+                    color: orangered;
 
                     &:hover {
                         transform: scale(1.06);
@@ -60,7 +60,7 @@ body {
             }
             li:last-child {
                 margin-top: 15px;
-                background: red;
+                background: orangered;
                 a{
                     color: rgb(48, 46, 46);
 
