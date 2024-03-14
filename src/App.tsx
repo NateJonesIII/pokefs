@@ -27,7 +27,7 @@ function App() {
     // fetch pokemon from PokeAPI
     const getPokeListData = async () => {
       const apiUrl: string = "https://pokeapi.co/api/v2";
-      const limit: number = 9;
+      const limit: number = 50;
       const offset: number = 0;
       const url: string = `${apiUrl}/pokemon?limit=${limit}&offset=${offset}`;
 
@@ -81,8 +81,9 @@ function App() {
     setUserTeam(updatedPokemon)
   }
 
-  const removePokemonFromState = () => {
-    
+  const removePokemonFromState = (pokeName: string) => {
+    const updatedPokemon = userTeam.filter(({name}) => name!== pokeName)
+    setUserTeam(updatedPokemon)
   }
 
   useEffect(()=>{
@@ -91,7 +92,7 @@ function App() {
         const userTeamQuery = query(
           collection(db, "pokemon"),
           where("user", "==", user)
-        )
+        );
 
         const queryCapture = await getDocs(userTeamQuery)
         const updatedPokemonList: Pokemon[] = [];// empty by default
@@ -106,7 +107,7 @@ function App() {
       }
     }
     getUserPokemonData()
-  }, [])
+  }, [db,user])
 
 
   const handleLogout = async () =>{
@@ -161,9 +162,11 @@ function App() {
           <h1 className='main-logo-text'>Pokedex FS</h1>
           <nav>
             <ul>
-              <li>
-                <Link to="/login">Login</Link>
-              </li>
+              {!isLoggedIn &&
+                  <li>
+                  <Link to="/login">Login</Link>
+                </li>
+              }
               <li>
                   <Link to="/">Home</Link>
                 </li>
@@ -174,9 +177,12 @@ function App() {
                 <li>
                   <Link to="/team">Team</Link>
                 </li>
-                <li onClick={handleLogout} className='logout-color'>
-                <Link to="/logout">Logout</Link>
-              </li>
+                {isLoggedIn && 
+                  <li onClick={handleLogout} className='logout-color'>
+                    <Link to="/login">Logout</Link>
+                  </li>
+                }
+                
               </div>
             </ul>
           </nav>

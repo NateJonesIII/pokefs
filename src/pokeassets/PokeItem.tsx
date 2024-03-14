@@ -1,6 +1,8 @@
 import { PokeItemProps, Pokemon } from "../types/types";
 import './pokeItem.css'
-import { addDoc, getFirestore, collection, CollectionReference } from 'firebase/firestore'
+import { useState, useEffect } from "react";
+import { addDoc, getFirestore, collection, CollectionReference, where, query, getDocs, deleteDoc } from 'firebase/firestore'
+
 
 const PokeItem: React.FC<PokeItemProps> = ({
     pokemon, flow, onAdd, onRemove
@@ -13,6 +15,8 @@ const PokeItem: React.FC<PokeItemProps> = ({
 
     // database call function
     const db = getFirestore();
+
+    const [owned,SetOwned] = useState<boolean>(false);
 
     const handleAddPokemon = (pokemon: Pokemon): void => { 
 
@@ -32,6 +36,55 @@ const PokeItem: React.FC<PokeItemProps> = ({
             console.log("Error adding the document", error);
         })
     };
+
+    useEffect(()=> {
+        const checkIfMonInTeam = async (pokemonName: string): Promise<void> => {
+            const userPokemonCollection = collection(db,"pokemon");
+
+            const isOwnedQuery = query(userPokemonCollection,
+                where("name","==", pokemonName),
+                where("user","==", userEmail),
+                );
+
+            const queryCapture = await getDocs(isOwnedQuery);
+            SetOwned(!queryCapture.empty)
+        }
+        checkIfMonInTeam(name);
+    }, [db, name, userEmail]);
+    console.log(owned)
+
+    // if pokemon is value is owned and in user profile change button to remove bool val
+    const addText: string = !owned ? 'Add' : 'Owned'
+
+    const isUserFlow: boolean = flow === 'user';
+
+    const isAvailableFlow: boolean = flow === 'available';
+
+    const handleRemovePokemon = async(pokemonName: string): Promise<void> => {
+        try {
+            const pokemonCollection = collection(db,"pokemon");
+            const deleteQuery = query(pokemonCollection,
+                where("name", "==", pokemonName)
+                );
+
+                const queryCapture = await getDocs(deleteQuery);
+                // if not found
+                if(queryCapture.docs.length === 0) {
+                    console.error("No pokemon found by that name " + pokemonName)
+                    return;
+                }
+
+                const pokemonDoc = queryCapture.docs[0];
+
+                console.log('queryCapture', queryCapture);
+                //console.log('pokemonDoc', pokemonDoc);
+
+                await deleteDoc(pokemonDoc.ref)
+                onRemove!(pokemonName) 
+        } catch (error) {
+            console.error("Error found: ", error)
+        }
+    }
 
     return( 
     <div className="poke-card">
@@ -53,7 +106,17 @@ const PokeItem: React.FC<PokeItemProps> = ({
                   {abilities.join(", ")}
             </p>
 
-            <button className="add-pokemon-button" onClick={()=>handleAddPokemon(pokemon)}>Add</button>
+            {isAvailableFlow &&
+                <button className="add-pokemon-button" 
+                onClick={()=>handleAddPokemon(pokemon)}
+                disabled={owned}
+                >{addText}</button>
+            }
+            {isUserFlow &&
+                <button className="add-pokemon-button" 
+                onClick={()=>handleRemovePokemon(name)}
+                >Remove</button>
+            }
         </div>
     </div>)
     

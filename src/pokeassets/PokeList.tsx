@@ -1,5 +1,6 @@
 import { PokemonProps } from "../types/types"
 import './poke_container.css'
+import './pokeList.css'
 import PokeItem from "./PokeItem"
 
 const pokeList: React.FC<PokemonProps> = ({
@@ -7,12 +8,12 @@ const pokeList: React.FC<PokemonProps> = ({
 }) => {
     return(
         <div className="outer-container">
-            <h1>Pokemon Catalogue</h1>
+            <h1 className="mainHeader">Pokebrary</h1>
             <div className="pokemon-container">
                 {
                     pokemons.map((pokemon, index) => {
                         return (
-                                <PokeItem flow='list' pokemon={pokemon} key={index} 
+                                <PokeItem flow='available' pokemon={pokemon} key={index} 
                                 onRemove={removePokemonFromState} 
                                 onAdd={addPokemonToState}/>
                         )
