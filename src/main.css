@@ -58,16 +58,16 @@ body {
   color: yellow;
 }
 
-.top-container nav ul li:last-child {
+.top-container nav ul .logout-color {
   margin-top: 15px;
   background: orangered;
 }
 
-.top-container nav ul li:last-child a {
+.top-container nav ul .logout-color a {
   color: #302e2e;
 }
 
-.top-container nav ul li:last-child a:hover {
+.top-container nav ul .logout-color a:hover {
   transform: scale(1.06);
   color: yellow;
 }

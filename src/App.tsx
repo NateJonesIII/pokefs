@@ -56,10 +56,10 @@ function App() {
               const types = pokemonData.types.map(({ type }: Type) => type.name);
               const abilities = pokemonData.abilities.map(({ ability }: Ability) => ability.name);
               const pokedexEntry = pokemonData.id;
-              console.log('PokeID:', pokedexEntry);
-              //console.log('pokemondata', pokemonData)
-              //console.log('types', types)
-              //console.log('abilities', abilities)
+              //console.log('PokeID:', pokedexEntry);
+              //console.log('pokemondata', pokemonData);
+              //console.log('types', types);
+              //console.log('abilities', abilities);
               const { sprites } = pokemonData;
               const image = sprites.front_default;
 
@@ -74,16 +74,16 @@ function App() {
     }
     getPokeListData();
     // single data call
-  },[])
+  },[db, user])
 
   const addPokemonToState = (pokemon: Pokemon):void => {
     const updatedPokemon = {...userTeam, pokemon}
-    setUserTeam(updatedPokemon)
+    setUserTeam(updatedPokemon);
   }
 
   const removePokemonFromState = (pokeName: string) => {
     const updatedPokemon = userTeam.filter(({name}) => name!== pokeName)
-    setUserTeam(updatedPokemon)
+    setUserTeam(updatedPokemon);
   }
 
   useEffect(()=>{
@@ -106,9 +106,8 @@ function App() {
         console.error(" Error getting user pokemon data!")
       }
     }
-    getUserPokemonData()
+    getUserPokemonData();
   }, [db,user])
-
 
   const handleLogout = async () =>{
     try {
@@ -168,22 +167,23 @@ function App() {
                 </li>
               }
               <li>
-                  <Link to="/">Home</Link>
-                </li>
-              <li>
                 <Link to="/register">Register</Link>
               </li>
+              {isLoggedIn && 
               <div>
-                <li>
+                  <li>
+                   <Link to="/">Home</Link>
+                 </li>
+                 <li>
                   <Link to="/team">Team</Link>
                 </li>
-                {isLoggedIn && 
-                  <li onClick={handleLogout} className='logout-color'>
-                    <Link to="/login">Logout</Link>
-                  </li>
-                }
-                
               </div>
+              }
+              {isLoggedIn && 
+                <li onClick={handleLogout} className='logout-color'>
+                  <Link to="/login">Logout</Link>
+                </li>
+              }
             </ul>
           </nav>
         </div>

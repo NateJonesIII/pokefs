@@ -1,7 +1,6 @@
 import { Auth } from "firebase/auth";
 export { };
 
-
 //Authentication Props
 export interface AuthProps {
     auth: Auth;
@@ -52,4 +51,3 @@ export interface PokeItemProps {
     onRemove?: Function;
     onAdd?: Function ;
 }
-
