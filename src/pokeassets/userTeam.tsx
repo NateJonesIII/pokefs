@@ -3,6 +3,7 @@ import { PokemonProps } from "../types/types"
 import {USER_FLOW} from '../constants/constants'
 import './poke_container.css'
 import PokeItem from "./PokeItem"
+import React from "react"
 
 const userTeam: React.FC<PokemonProps> = ({
     user, pokemons, removePokemonFromState, 

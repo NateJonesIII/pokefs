@@ -2,6 +2,7 @@ import { AuthProps } from "../types/types";
 import React, {useState, ReactElement } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { loginErrorNotification, loginSuccessNotification } from "../notifications/notifications";
 import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
 
 const Login: React.FC<AuthProps> = ({
@@ -24,12 +25,12 @@ const Login: React.FC<AuthProps> = ({
                     setIsLoggedIn(true);
                     setUser(user.email!);
                     navigate("/");
-                    console.log(`The Trainer ${user.email} has logged in!`);
+                    loginSuccessNotification(email);
                 }
             )
         } catch (error) {
             setIsRegistered(false);
-            console.log(error);
+            loginErrorNotification(error)
         }
     }
 

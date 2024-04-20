@@ -1,9 +1,12 @@
 import { PokeItemProps, Pokemon } from "../types/types";
-import './pokeItem.css'
+import './pokeItem.css';
 import { useState, useEffect } from "react";
-import {AVAILABLE_FLOW, USER_FLOW, ADD_TEXT, OWNED_TEXT} from '../constants/constants'
-import { addDoc, getFirestore, collection, CollectionReference, where, query, getDocs, deleteDoc } from 'firebase/firestore'
-
+import {AVAILABLE_FLOW, USER_FLOW, ADD_TEXT, OWNED_TEXT} from '../constants/constants';
+import { addDoc, getFirestore, collection, CollectionReference, where, query, getDocs, deleteDoc } from 'firebase/firestore';
+import { addPokemonErrorNotification,   
+        addPokemonSuccessNotification, 
+        removePokemonErrorNotification, removePokemonSucessNotification 
+    } from "../notifications/notifications";
 
 const PokeItem: React.FC<PokeItemProps> = ({
     pokemon, flow, onAdd, onRemove
@@ -30,11 +33,11 @@ const PokeItem: React.FC<PokeItemProps> = ({
         addDoc(collection(db, "pokemon"), pokemon).then(() => {
             // call the onAdd function here to add doc to database
             onAdd!(pokemon); // "!" ignore undefined function error
-
-            console.log(pokemon.name + ' was sent to pc');
+            addPokemonSuccessNotification(name)
+            //console.log(pokemon.name + ' was sent to pc');
 
         }).catch((error) => {
-            console.log("Error adding the document", error);
+            addPokemonErrorNotification(error)
         })
     };
 
@@ -82,12 +85,13 @@ const PokeItem: React.FC<PokeItemProps> = ({
 
                 await deleteDoc(pokemonDoc.ref)
                 onRemove!(pokemonName) 
+                removePokemonSucessNotification(name)
         } catch (error) {
-            console.error("Error found: ", error)
+            removePokemonErrorNotification(error)
         }
     }
 
-    return( 
+    return ( 
     <div className="poke-card">
         <div className="poke-data">
             <p><span>PokeDex#: </span>{pokedexEntry}</p>

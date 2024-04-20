@@ -13,6 +13,8 @@ import UserTeam from './pokeassets/userTeam';
 import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
 // Import VideoComponent
 import VideoComponent from './pokeassets/VideoComponent';
+import { ToastContainer } from 'react-toastify';
+import { logoutErrorNotification, logoutSuccessNotification } from './notifications/notifications'
 
 function App() {
   // the list to update for pokemon api call
@@ -117,9 +119,9 @@ function App() {
       await signOut(auth);
       setIsLoggedIn(false);
       setUser("");
-      console.log(user, ' has been logged out successfully');
+      logoutSuccessNotification(user)
     } catch (error) {
-      console.error('Error logging out user', error);
+      logoutErrorNotification(error);
     }
   }
 
@@ -158,6 +160,7 @@ function App() {
   // Returning site initial page ui
   return (
     <div className="App">
+      <ToastContainer />
       <Router>
         <div className="top-container">
           <img src={pokeballImg} alt="pokeball-black-2d"/>

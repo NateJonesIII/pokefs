@@ -3,7 +3,7 @@ import React, {useState, ReactElement } from "react";
 import './auth.css'
 import { useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-
+import { registrationErrorNotification, registrationSuccessNotification } from "../notifications/notifications";
 
 const Register: React.FC<AuthProps> = ({
     auth,
@@ -25,12 +25,12 @@ const Register: React.FC<AuthProps> = ({
                     setIsLoggedIn(true);
                     setUser(user.email!);
                     navigate("/");
-                    console.log(user.email, "has become a trainer!");
+                    registrationSuccessNotification(email)
                 }
             )
         } catch (error) {
             setIsRegistered(false);
-            console.log(error);
+            registrationErrorNotification(error)
         }
     }
 

@@ -29,6 +29,7 @@ export interface PokedexEntry{
 }
 
 export interface Pokemon {
+    map: any;
     id: number;
     name: string;
     types: string[];
@@ -39,7 +40,7 @@ export interface Pokemon {
 }
 
 export interface PokemonProps {
-    pokemons: Pokemon[];
+    pokemons: Pokemon;
     user: string;
     removePokemonFromState?: Function;
     addPokemonToState?: Function;
