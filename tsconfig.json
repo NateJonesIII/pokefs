@@ -17,6 +17,5 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src"],
-  "include": ["*.webm"]
+  "include": ["src", "*.webm", "*.ico"]
 }
