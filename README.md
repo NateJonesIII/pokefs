@@ -14,7 +14,7 @@
 
 ## Preview
 
-<img width="500" alt="Tag" src="https://github.com/NateJonesIII/pokefs/blob/main/assets/preview.PNG">
+<img width="500" alt="Tag" src="https://github.com/NateJonesIII/pokefs/blob/main/src/assets/preview.PNG">
 
 ## Project Description
 
