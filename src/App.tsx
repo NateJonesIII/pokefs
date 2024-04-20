@@ -32,7 +32,7 @@ function App() {
     // fetch pokemon from PokeAPI
     const getPokeListData = async () => {
       const apiUrl: string = "https://pokeapi.co/api/v2";
-      const limit: number = 50;
+      const limit: number = 1025;
       const offset: number = 0;
       const url: string = `${apiUrl}/pokemon?limit=${limit}&offset=${offset}`;
 
