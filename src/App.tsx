@@ -1,3 +1,4 @@
+// App.tsx
 import React, {useEffect, useState} from 'react';
 import PokeList from './pokeassets/PokeList';
 import { Pokemon, Type, Ability, PokedexEntry} from './types/types'
@@ -10,6 +11,8 @@ import { getAuth, signOut } from 'firebase/auth';
 import pokeballImg from './assets/pokei_ico.png'
 import UserTeam from './pokeassets/userTeam';
 import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
+// Import VideoComponent
+import VideoComponent from './pokeassets/VideoComponent';
 
 function App() {
   // the list to update for pokemon api call
@@ -137,7 +140,7 @@ function App() {
     setUser={setUser}
     />
   )
-    // holding HomePage htmml content for cleaner routes
+    // holding HomePage html content for cleaner routes
   const HomePage = () => (
     <div>
       <PokeList pokemons={pokeList} user={user} addPokemonToState={addPokemonToState}/>
@@ -161,6 +164,7 @@ function App() {
           <h1 className='main-logo-text'>Pokedex FS</h1>
           <nav>
             <ul>
+             
               {!isLoggedIn &&
                   <li>
                   <Link to="/login">Login</Link>
@@ -169,6 +173,7 @@ function App() {
               <li>
                 <Link to="/register">Register</Link>
               </li>
+
               {isLoggedIn && 
               <div>
                   <li>
@@ -187,6 +192,7 @@ function App() {
             </ul>
           </nav>
         </div>
+        <VideoComponent />
         <Routes>
           <Route path="/register" element={RegisterComponent}/>
           <Route path="/team" element={TeamComponent}/>

@@ -1,7 +1,9 @@
+// PokeList
 import { PokemonProps } from "../types/types"
 import './poke_container.css'
 import './pokeList.css'
 import PokeItem from "./PokeItem"
+import {AVAILABLE_FLOW} from '../constants/constants'
 
 const pokeList: React.FC<PokemonProps> = ({
     pokemons, removePokemonFromState, addPokemonToState

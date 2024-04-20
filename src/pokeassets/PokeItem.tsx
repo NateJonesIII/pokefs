@@ -1,6 +1,7 @@
 import { PokeItemProps, Pokemon } from "../types/types";
 import './pokeItem.css'
 import { useState, useEffect } from "react";
+import {AVAILABLE_FLOW, USER_FLOW, ADD_TEXT, OWNED_TEXT} from '../constants/constants'
 import { addDoc, getFirestore, collection, CollectionReference, where, query, getDocs, deleteDoc } from 'firebase/firestore'
 
 
@@ -54,11 +55,11 @@ const PokeItem: React.FC<PokeItemProps> = ({
     console.log(owned)
 
     // if pokemon is value is owned and in user profile change button to remove bool val
-    const addText: string = !owned ? 'Add' : 'Owned'
+    const addText: string = !owned ? ADD_TEXT : OWNED_TEXT
 
-    const isUserFlow: boolean = flow === 'user';
+    const isUserFlow: boolean = flow === USER_FLOW;
 
-    const isAvailableFlow: boolean = flow === 'available';
+    const isAvailableFlow: boolean = flow === AVAILABLE_FLOW;
 
     const handleRemovePokemon = async(pokemonName: string): Promise<void> => {
         try {

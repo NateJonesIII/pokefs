@@ -8,6 +8,16 @@ body {
     background-color: rgba(255, 255, 205, 0.829);
 }
 
+.video-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; // Adjust margin as needed
+    
+    .video-wrapper {
+      max-width: 800px; // Set the maximum width of the video container
+    }
+}
+
 .top-container {
     margin: 20px auto;
     display: flex;

@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { PokemonProps } from "../types/types"
+import {USER_FLOW} from '../constants/constants'
 import './poke_container.css'
 import PokeItem from "./PokeItem"
 
@@ -15,7 +16,7 @@ const userTeam: React.FC<PokemonProps> = ({
                     pokemons.map((pokemon, index) => {
                         return (
                                 <PokeItem 
-                                flow='user'
+                                flow={USER_FLOW}
                                 pokemon={pokemon} 
                                 key={index} 
                                 onRemove={removePokemonFromState}
