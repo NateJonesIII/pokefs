@@ -28,7 +28,7 @@
 ## Technologies Used
 
 - `React`
-- `Firebase` (for authentication and data storage)
+- `Firebase` (for authentication, data storage, and hosting)
 - `PokeAPI` (for Pokémon data)
 
 ## Features
@@ -59,6 +59,7 @@ The project follows modern React development practices and utilizes Firebase for
 - `Node.js`: `12.x` or higher
 - `React`: `17.x`
 - `Firebase` account (for authentication and Firestore)
+- `Toastify` for ui notifications
 - Internet connection to fetch Pokémon data from PokeAPI
 
 ## Creator
