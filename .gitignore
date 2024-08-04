@@ -135,3 +135,6 @@ dist
 
 # if edited on mac
 .DS_Store
+
+# firebase api google doesnt offer free security services for backend
+firebaseConfig.js
